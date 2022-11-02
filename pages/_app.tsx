@@ -12,8 +12,7 @@ import { argentWallet, trustWallet } from '@rainbow-me/rainbowkit/wallets';
 import { chain, createClient, configureChains, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
 // import { Chain, getDefaultWallets,darkTheme } from '@rainbow-me/rainbowkit';
-import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
-
+import {Helmet} from 'react-helmet';
 
 const shardeumLiberty8081: Chain = {
   id: 8081,
@@ -69,6 +68,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider theme={darkTheme()} appInfo={demoAppInfo} chains={chains}>
+        <Helmet>
+            <style>{'body { background-color: black; }'}</style>
+        </Helmet>
         <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>

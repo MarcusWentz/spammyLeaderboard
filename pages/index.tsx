@@ -18,6 +18,7 @@ const contractConfig = {
 };
 
 const Home: NextPage = () => {
+
   const [mounted, setMounted] = React.useState(false);
   React.useEffect(() => setMounted(true), []);
 
