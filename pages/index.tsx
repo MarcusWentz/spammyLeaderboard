@@ -23,6 +23,7 @@ const Home: NextPage = () => {
   React.useEffect(() => setMounted(true), []);
 
   const [totalMinted, setTotalMinted] = React.useState(0);
+  const [owner, setOwner] = React.useState(0);
   const { isConnected } = useAccount();
 
   const { config: contractWriteConfig } = usePrepareContractWrite({
@@ -44,6 +45,24 @@ const Home: NextPage = () => {
     watch: true,
   });
 
+  React.useEffect(() => {
+    if (totalSupplyData) {
+      setTotalMinted(totalSupplyData.toNumber());
+    }
+  }, [totalSupplyData]);
+
+  const { data: ownerData } = useContractRead({
+    ...contractConfig,
+    functionName: 'owner',
+    watch: true,
+  });
+
+  React.useEffect(() => {
+    if (ownerData) {
+      setOwner(ownerData);
+    }
+  }, [ownerData]);
+
   const {
     data: txData,
     isSuccess: txSuccess,
@@ -51,12 +70,6 @@ const Home: NextPage = () => {
   } = useWaitForTransaction({
     hash: mintData?.hash,
   });
-
-  React.useEffect(() => {
-    if (totalSupplyData) {
-      setTotalMinted(totalSupplyData.toNumber());
-    }
-  }, [totalSupplyData]);
 
   const isMinted = txSuccess;
 
@@ -71,6 +84,9 @@ const Home: NextPage = () => {
             </p>
             <p style={{ margin: '0px 0 0px', color: '#FFFFFF' }}>
               {totalMinted} minted spam
+            </p>
+            <p style={{ margin: '0px 0 0px', color: '#FFFFFF' }}>
+              contract owner {owner}
             </p>
             <ConnectButton />
 
