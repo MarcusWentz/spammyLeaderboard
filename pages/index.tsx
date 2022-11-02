@@ -13,7 +13,7 @@ import { abi } from '../contract-abi';
 import FlipCard, { BackCard, FrontCard } from '../components/FlipCard';
 
 const contractConfig = {
-  address: '0xEb9322b1e1268e8A4e35C2e37041740296908bfb',
+  address: '0x8e83df10Fbf319Ff7344009A78b5bf2E89a5e4DF',
   abi,
 };
 
@@ -23,12 +23,13 @@ const Home: NextPage = () => {
   React.useEffect(() => setMounted(true), []);
 
   const [totalMinted, setTotalMinted] = React.useState(0);
+  const [balanceOfAddressWithTheMostTokens, setBalanceOfAddressWithTheMostTokens] = React.useState(0);
   const [owner, setOwner] = React.useState(0);
   const { isConnected } = useAccount();
 
   const { config: contractWriteConfig } = usePrepareContractWrite({
     ...contractConfig,
-    functionName: 'mint',
+    functionName: 'mintNewLeaderBoardToken',
   });
 
   const {
@@ -41,7 +42,7 @@ const Home: NextPage = () => {
 
   const { data: totalSupplyData } = useContractRead({
     ...contractConfig,
-    functionName: 'totalSupply',
+    functionName: 'leaderboardTokenId',
     watch: true,
   });
 
@@ -51,9 +52,21 @@ const Home: NextPage = () => {
     }
   }, [totalSupplyData]);
 
+  const { data: balanceOfAddressWithTheMostTokensData } = useContractRead({
+    ...contractConfig,
+    functionName: 'balanceOfAddressWithTheMostTokens',
+    watch: true,
+  });
+
+  React.useEffect(() => {
+    if (balanceOfAddressWithTheMostTokensData) {
+      setBalanceOfAddressWithTheMostTokens(balanceOfAddressWithTheMostTokensData.toNumber());
+    }
+  }, [balanceOfAddressWithTheMostTokensData]);
+
   const { data: ownerData } = useContractRead({
     ...contractConfig,
-    functionName: 'owner',
+    functionName: 'addressWithMostTokens',
     watch: true,
   });
 
@@ -83,7 +96,7 @@ const Home: NextPage = () => {
               {totalMinted} minted spam
             </p>
             <p style={{ margin: '0px 0 0px', color: '#FFFFFF' }}>
-              {totalMinted} minted spam
+              balanceOfAddressWithTheMostTokens {balanceOfAddressWithTheMostTokens}
             </p>
             <p style={{ margin: '0px 0 0px', color: '#FFFFFF' }}>
               contract owner {owner}
