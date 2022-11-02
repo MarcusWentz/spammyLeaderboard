@@ -63,7 +63,7 @@ const Home: NextPage = () => {
   return (
     <div className="page">
       <div className="container">
-        <div style={{ flex: '0 0 auto' }}>
+        <div style={{ flex: '24 24 auto' }}>
           <div style={{ padding: '0px 0px 0px 0' , color: '#FFFFFF'}}>
             <h1>Spam NFT</h1>
             <p style={{ margin: '0px 0 0px', color: '#FFFFFF' }}>
@@ -102,7 +102,7 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-        <div style={{ flex: '0 0 auto' }}>
+        <div style={{ flex: '24 24 auto' }}>
          <FlipCard>
            <FrontCard isCardFlipped={isMinted}>
              <Image
