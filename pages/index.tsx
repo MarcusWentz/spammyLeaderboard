@@ -24,7 +24,7 @@ const Home: NextPage = () => {
 
   const [totalMinted, setTotalMinted] = React.useState(0);
   const [balanceOfAddressWithTheMostTokens, setBalanceOfAddressWithTheMostTokens] = React.useState(0);
-  const [owner, setOwner] = React.useState(0);
+  const [addressWithMostTokens, setAddressWithMostTokens] = React.useState(0);
   const { isConnected } = useAccount();
 
   const { config: contractWriteConfig } = usePrepareContractWrite({
@@ -64,17 +64,17 @@ const Home: NextPage = () => {
     }
   }, [balanceOfAddressWithTheMostTokensData]);
 
-  const { data: ownerData } = useContractRead({
+  const { data: addressWithMostTokensData } = useContractRead({
     ...contractConfig,
     functionName: 'addressWithMostTokens',
     watch: true,
   });
 
   React.useEffect(() => {
-    if (ownerData) {
-      setOwner(ownerData);
+    if (addressWithMostTokensData) {
+      setAddressWithMostTokens(addressWithMostTokensData);
     }
-  }, [ownerData]);
+  }, [addressWithMostTokensData]);
 
   const {
     data: txData,
@@ -93,13 +93,13 @@ const Home: NextPage = () => {
           <div style={{ padding: '0px 0px 0px 0' , color: '#FFFFFF'}}>
             <h1>Spam NFT</h1>
             <p style={{ margin: '0px 0 0px', color: '#FFFFFF' }}>
-              {totalMinted} minted spam
+              Total Minted Spam: {totalMinted}
             </p>
             <p style={{ margin: '0px 0 0px', color: '#FFFFFF' }}>
-              balanceOfAddressWithTheMostTokens {balanceOfAddressWithTheMostTokens}
+              balanceOfAddressWithTheMostTokens: {balanceOfAddressWithTheMostTokens}
             </p>
             <p style={{ margin: '0px 0 0px', color: '#FFFFFF' }}>
-              contract owner {owner}
+              addressWithMostTokens: {addressWithMostTokens}
             </p>
             <ConnectButton />
 
