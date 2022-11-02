@@ -1,4 +1,4 @@
-Contract here: https://gist.github.com/peduarte/b48fbf6ff35de431207d68250679a05b
+Contract here: https://github.com/MarcusWentz/NftExamples/blob/main/contracts/ERC-1155/Leaderboard.sol
 
 ---
 
