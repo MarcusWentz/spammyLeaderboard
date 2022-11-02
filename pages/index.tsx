@@ -63,11 +63,14 @@ const Home: NextPage = () => {
   return (
     <div className="page">
       <div className="container">
-        <div style={{ flex: '1 1 auto' }}>
-          <div style={{ padding: '24px 24px 24px 0' }}>
-            <h1>NFT Demo Mint</h1>
-            <p style={{ margin: '12px 0 24px' }}>
-              {totalMinted} minted so far!
+        <div style={{ flex: '0 0 auto' }}>
+          <div style={{ padding: '0px 0px 0px 0' , color: '#FFFFFF'}}>
+            <h1>Spam NFT</h1>
+            <p style={{ margin: '0px 0 0px', color: '#FFFFFF' }}>
+              {totalMinted} minted spam
+            </p>
+            <p style={{ margin: '0px 0 0px', color: '#FFFFFF' }}>
+              {totalMinted} minted spam
             </p>
             <ConnectButton />
 
@@ -100,49 +103,42 @@ const Home: NextPage = () => {
         </div>
 
         <div style={{ flex: '0 0 auto' }}>
-          <FlipCard>
-            <FrontCard isCardFlipped={isMinted}>
-              <Image
-                layout="responsive"
-                src="/nft.png"
-                width="500"
-                height="500"
-                alt="RainbowKit Demo NFT"
-              />
-              <h1 style={{ marginTop: 24 }}>Rainbow NFT</h1>
-              <ConnectButton />
-            </FrontCard>
-            <BackCard isCardFlipped={isMinted}>
-              <div style={{ padding: 24 }}>
-                <Image
-                  src="/nft.png"
-                  width="80"
-                  height="80"
-                  alt="RainbowKit Demo NFT"
-                  style={{ borderRadius: 8 }}
-                />
-                <h2 style={{ marginTop: 24, marginBottom: 6 }}>NFT Minted!</h2>
-                <p style={{ marginBottom: 24 }}>
-                  Your NFT will show up in your wallet in the next few minutes.
-                </p>
-                <p style={{ marginBottom: 6 }}>
-                  View on{' '}
-                  <a href={`https://goerli.etherscan.io/tx/${mintData?.hash}`}>
-                    Etherscan
-                  </a>
-                </p>
-                <p>
-                  View on{' '}
-                  <a
-                    href={`https://testnets.opensea.io/assets/goerli/${txData?.to}/1`}
-                  >
-                    Opensea
-                  </a>
-                </p>
-              </div>
-            </BackCard>
-          </FlipCard>
-        </div>
+         <FlipCard>
+           <FrontCard isCardFlipped={isMinted}>
+             <Image
+               layout="responsive"
+               src="/nft.png"
+               width="500"
+               height="500"
+               alt="RainbowKit Demo NFT"
+             />
+             <h1 style={{ marginTop: 24 }}>Rainbow NFT</h1>
+             <ConnectButton />
+           </FrontCard>
+           <BackCard isCardFlipped={isMinted}>
+             <div style={{ padding: 24 }}>
+               <Image
+                 src="/nft.png"
+                 width="80"
+                 height="80"
+                 alt="RainbowKit Demo NFT"
+                 style={{ borderRadius: 8 }}
+               />
+               <h2 style={{ marginTop: 24, marginBottom: 6 }}>NFT Minted!</h2>
+               <p style={{ marginBottom: 24 }}>
+                 Your NFT will show up in your wallet in the next few minutes.
+               </p>
+               <p style={{ marginBottom: 6 }}>
+                 View on{' '}
+                 <a href={`https://explorer-liberty20.shardeum.org/transaction/${mintData?.hash}`}>
+                   Shardeum Explorer
+                 </a>
+               </p>
+             </div>
+           </BackCard>
+         </FlipCard>
+       </div>
+
       </div>
     </div>
   );
